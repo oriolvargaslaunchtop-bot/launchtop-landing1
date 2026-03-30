@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Launch Top™ — Tu departamento externo de ventas B2B. Aceleramos el crecimiento de empresas y startups sin que contrates a nadie.">
+  <title>Launch Top™ — Ventas B2B sin estructura fija</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg:     #050510;
+      --blue:   #2563EB;
+      --cyan:   #06B6D4;
+      --text:   #F8FAFC;
+      --muted:  #94A3B8;
+      --card:   #0F172A;
+      --border: #1E293B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navbar scroll */
+    .nav-scrolled {
+      background: rgba(5,5,16,0.9) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Hero grid */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(37,99,235,0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.055) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    /* Marquee */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      box-shadow: 0 0 28px rgba(37,99,235,.13);
+    }
+
+    /* Fade in */
+    .fi {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fi.on { opacity:1; transform:translateY(0); }
+
+    /* Buttons */
+    .btn-p {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--text);
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      border: none; cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background .2s, transform .2s, box-shadow .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-p:hover {
+      background: #1D4ED8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(37,99,235,.38);
+    }
+    .btn-s {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: border-color .2s, background .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-s:hover {
+      border-color: var(--blue);
+      background: rgba(37,99,235,.08);
+    }
+
+    /* Pills */
+    .pill {
+      display: inline-block;
+      background: rgba(37,99,235,.1);
+      border: 1px solid rgba(37,99,235,.3);
+      color: var(--blue);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .pill-cyan {
+      background: rgba(6,182,212,.1);
+      border-color: rgba(6,182,212,.3);
+      color: var(--cyan);
+    }
+
+    /* Tag badge */
+    .tag {
+      display: inline-block;
+      background: rgba(6,182,212,.08);
+      border: 1px solid rgba(6,182,212,.26);
+      color: var(--cyan);
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .stars { color:#F59E0B; letter-spacing:2px; }
+
+    /* Range inputs */
+    input[type='range'] {
+      -webkit-appearance:none;
+      appearance:none;
+      width:100%; height:5px;
+      background: var(--border);
+      border-radius:3px; outline:none;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance:none;
+      appearance:none;
+      width:20px; height:20px;
+      background: var(--blue);
+      border-radius:50%; cursor:pointer;
+      transition: background .2s;
+    }
+    input[type='range']::-webkit-slider-thumb:hover { background: var(--cyan); }
+
+    /* Form inputs */
+    .fi-input {
+      width:100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 15px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .fi-input:focus { border-color: var(--blue); }
+    .fi-input::placeholder { color: var(--muted); }
+    select.fi-input option { background: #0F172A; }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed; inset:0;
+      background: rgba(5,5,16,.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:200;
+      align-items:center;
+      justify-content:center;
+    }
+    .modal.open { display:flex; }
+
+    /* CTA section */
+    .cta-bg { background: linear-gradient(135deg,#060717 0%,#0c1b3d 50%,#060717 100%); }
+
+    /* Image overlay helper */
+    .img-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .img-card img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      filter: brightness(0.7) saturate(0.6);
+      transition: transform .5s ease, filter .5s ease;
+    }
+    .img-card:hover img { transform:scale(1.04); filter:brightness(0.8) saturate(0.7); }
+    .img-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(5,5,16,.85) 0%, rgba(5,5,16,.2) 60%, transparent 100%);
+    }
+
+    /* NavLink style */
+    .nl { color:#94A3B8;font-size:14px;font-weight:500;text-decoration:none;transition:color .2s; }
+    .nl:hover { color:#F8FAFC; }
+
+    /* Footer link */
+    .fl { color:#475569;font-size:14px;text-decoration:none;transition:color .2s; }
+    .fl:hover { color:#94A3B8; }
+
+    /* Section title */
+    .sec-h {
+      font-size: clamp(28px,4vw,46px);
+      font-weight:700;
+      margin:0 0 14px;
+      letter-spacing:-1px;
+    }
+
+    /* Steps connector (desktop) */
+    .step-connector {
+      position:absolute;
+      top:24px; left:calc(50% + 24px);
+      width:calc(100% - 48px);
+      height:1px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    /* Responsive */
+    @media (max-width:767px) {
+      .d-nav   { display:none !important; }
+      .d-cta   { display:none !important; }
+      .ham     { display:flex !important; }
+      .g2      { grid-template-columns:1fr !important; }
+      .g3      { grid-template-columns:1fr !important; }
+      .g4      { grid-template-columns:1fr !important; }
+      .hero-split { flex-direction:column !important; }
+      .hero-img   { display:none !important; }
+      .hist-split { flex-direction:column-reverse !important; }
+      .hist-img   { height:220px !important; }
+      .stat-divider { display:none !important; }
+      .step-connector { display:none !important; }
+      .form2c  { grid-template-columns:1fr !important; }
+      .footer-top { flex-direction:column !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====================================================
+     NAVBAR
+     ==================================================== -->
+<nav id="nav" style="position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;transition:all .3s ease;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px;">
+
+    <!-- Logo -->
+    <a href="#" style="text-decoration:none;display:flex;align-items:center;">
+      <img src="logo.png" alt="Launch Top™"
+           style="height:33px;object-fit:contain;filter:brightness(0) invert(1);"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <span style="display:none;font-weight:700;font-size:18px;color:#F8FAFC;">Launch Top™</span>
+    </a>
+
+    <!-- Desktop links -->
+    <div class="d-nav" style="display:flex;align-items:center;gap:28px;">
+      <a href="#servicios"    class="nl">Servicios</a>
+      <a href="#metodologia"  class="nl">Metodología</a>
+      <a href="#calculadora"  class="nl">Calculadora</a>
+      <a href="#testimonios"  class="nl">Testimonios</a>
+      <button onclick="openContact()" class="nl" style="background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;padding:0;">Contacto</button>
+    </div>
+
+    <!-- Desktop CTA -->
+    <button onclick="openQual()" class="btn-p d-cta" style="font-size:14px;padding:10px 20px;">
+      Reservar reunión
+    </button>
+
+    <!-- Hamburger -->
+    <button id="ham" class="ham" onclick="toggleMenu()"
+            style="display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;">
+      <span style="width:22px;height:2px;background:#F8FAFC;display:block;"></span>
+      <span style="width:22px;height:2px;background:#F8FAFC;display:block;"></span>
+      <span style="width:22px;height:2px;background:#F8FAFC;display:block;"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mmenu" style="display:none;background:#0F172A;border-top:1px solid #1E293B;padding:20px 24px;">
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <a href="#servicios"   onclick="closeMenu()" class="nl" style="font-size:15px;">Servicios</a>
+      <a href="#metodologia" onclick="closeMenu()" class="nl" style="font-size:15px;">Metodología</a>
+      <a href="#calculadora" onclick="closeMenu()" class="nl" style="font-size:15px;">Calculadora</a>
+      <a href="#testimonios" onclick="closeMenu()" class="nl" style="font-size:15px;">Testimonios</a>
+      <button onclick="openContact();closeMenu();" class="nl" style="background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;padding:0;font-size:15px;">Contacto</button>
+      <button onclick="openQual();closeMenu();" class="btn-p" style="text-align:center;margin-top:4px;">Reservar reunión</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ====================================================
+     HERO
+     ==================================================== -->
+<section class="hero-grid" style="min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden;">
+
+  <canvas id="pcv" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.4;"></canvas>
+  <div style="position:absolute;top:10%;left:5%;width:420px;height:420px;background:radial-gradient(circle,rgba(37,99,235,.11) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:10%;right:5%;width:320px;height:320px;background:radial-gradient(circle,rgba(6,182,212,.07) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;width:100%;">
+    <div class="hero-split" style="display:flex;align-items:center;gap:64px;">
+
+      <!-- Left: text -->
+      <div style="flex:1;min-width:0;position:relative;z-index:1;">
+        <div class="fi" style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <span class="pill">Ventas B2B</span>
+          <span class="pill pill-cyan">Aceleradora de startups</span>
+        </div>
+
+        <h1 class="fi" style="font-size:clamp(34px,5.5vw,66px);font-weight:700;line-height:1.1;margin:0 0 22px;letter-spacing:-1.5px;">
+          Tu departamento<br>de ventas B2B.<br>
+          <span style="background:linear-gradient(135deg,#2563EB,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sin contratar a nadie.</span>
+        </h1>
+
+        <p class="fi" style="font-size:clamp(15px,1.8vw,18px);color:#94A3B8;line-height:1.8;margin:0 0 36px;max-width:520px;">
+          Launch Top™ construye y opera tu proceso de ventas B2B como si fuera tu propio equipo.
+          Para empresas establecidas que quieren escalar y para startups que necesitan sus primeras ventas.
+        </p>
+
+        <div class="fi" style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button onclick="openQual()" class="btn-p" style="font-size:15px;padding:14px 28px;">
+            Solicitar reunión gratuita →
+          </button>
+          <a href="#historia" class="btn-s" style="font-size:15px;padding:14px 28px;">
+            Nuestra historia
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="fi" style="display:flex;gap:36px;margin-top:52px;flex-wrap:wrap;align-items:center;">
+          <div>
+            <div style="font-size:28px;font-weight:700;">48h</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:3px;">Pipeline activo</div>
+          </div>
+          <div class="stat-divider" style="width:1px;height:40px;background:#1E293B;"></div>
+          <div>
+            <div style="font-size:28px;font-weight:700;">3×</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:3px;">Más barato que interno</div>
+          </div>
+          <div class="stat-divider" style="width:1px;height:40px;background:#1E293B;"></div>
+          <div>
+            <div style="font-size:28px;font-weight:700;">+50</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:3px;">Fundadores asesorados</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: image -->
+      <div class="hero-img fi" style="flex:0 0 42%;max-width:460px;height:520px;">
+        <div class="img-card" style="height:100%;border:1px solid #1E293B;">
+          <img src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?auto=format&fit=crop&w=700&q=80"
+               alt="Reunión de ventas B2B"
+               loading="eager">
+          <div class="img-overlay"></div>
+          <div style="position:absolute;bottom:24px;left:24px;right:24px;">
+            <div style="background:rgba(5,5,16,.7);backdrop-filter:blur(8px);border:1px solid #1E293B;border-radius:10px;padding:16px;">
+              <div style="font-size:13px;color:#94A3B8;margin-bottom:4px;">Resultado medio del primer trimestre</div>
+              <div style="font-size:22px;font-weight:700;color:#4ADE80;">+14 reuniones calificadas / mes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     LOGOS MARQUEE
+     ==================================================== -->
+<section style="padding:40px 0;background:#0F172A;border-top:1px solid #1E293B;border-bottom:1px solid #1E293B;overflow:hidden;">
+  <p style="text-align:center;color:#94A3B8;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:2.5px;margin:0 0 26px;">
+    Empresas que confían en Launch Top™
+  </p>
+  <div style="position:relative;overflow:hidden;">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,#0F172A,transparent);z-index:2;pointer-events:none;"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(-90deg,#0F172A,transparent);z-index:2;pointer-events:none;"></div>
+    <div class="marquee-track">
+      <!-- Set 1 -->
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-bufalvent.png" alt="Búfalvent" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Búfalvent</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-datrax.png" alt="Datrax" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Datrax</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-mobafrutal.png" alt="Mobafrutal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Mobafrutal</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-lilac.png" alt="Lilac" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Lilac</span>
+      </div>
+      <!-- Set 2 (duplicado) -->
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-bufalvent.png" alt="Búfalvent" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Búfalvent</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-datrax.png" alt="Datrax" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Datrax</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-mobafrutal.png" alt="Mobafrutal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Mobafrutal</span>
+      </div>
+      <div style="display:flex;align-items:center;margin:0 52px;">
+        <img src="logo-lilac.png" alt="Lilac" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:.5;" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span style="display:none;color:#94A3B8;font-size:16px;font-weight:600;">Lilac</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     HISTORIA — ORIGEN DE LAUNCH TOP™
+     ==================================================== -->
+<section id="historia" style="padding:96px 24px;background:#0F172A;border-bottom:1px solid #1E293B;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="hist-split" style="display:flex;align-items:center;gap:64px;">
+
+      <!-- Image -->
+      <div class="hist-img fi" style="flex:0 0 44%;height:480px;">
+        <div class="img-card" style="height:100%;border:1px solid #1E293B;">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80"
+               alt="Oriol hablando con fundadores"
+               loading="lazy">
+          <div class="img-overlay"></div>
+          <div style="position:absolute;top:20px;left:20px;">
+            <span class="pill" style="margin:0;">Fundado en Barcelona</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div style="flex:1;min-width:0;">
+        <div class="pill fi">Nuestra historia</div>
+        <h2 class="sec-h fi">Nació de escuchar a más de 50 fundadores</h2>
+        <div class="fi" style="color:#94A3B8;font-size:15px;line-height:1.85;display:flex;flex-direction:column;gap:16px;">
+          <p style="margin:0;">
+            Oriol empezó hablando con fundadores de empresas de sectores muy distintos.
+            Restauradores, creadores de marca, directivos de SaaS. En casi todas las conversaciones
+            emergía el mismo problema: <strong style="color:#F8FAFC;">nadie tenía un proceso de ventas B2B estructurado.</strong>
+          </p>
+          <p style="margin:0;">
+            Los mejores productos no se vendían porque nadie sabía cómo llegar al cliente correcto,
+            cómo gestionar el pipeline ni cómo cerrar sin improvisar. El problema no era el producto.
+            Era la falta de un departamento de ventas que funcionara de verdad.
+          </p>
+          <p style="margin:0;">
+            Launch Top™ nació para resolver exactamente eso: ser ese departamento de ventas que la
+            mayoría de empresas necesita pero no puede permitirse construir internamente.
+            <strong style="color:#F8FAFC;">No solo para empresas establecidas. También para startups que necesitan
+            sus primeras ventas B2B sin contratar a un equipo que aún no pueden costear.</strong>
+          </p>
+        </div>
+
+        <div class="fi" style="margin-top:32px;display:flex;gap:24px;flex-wrap:wrap;">
+          <div style="background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:16px 22px;">
+            <div style="font-size:22px;font-weight:700;color:#F8FAFC;">+50</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:2px;">fundadores entrevistados</div>
+          </div>
+          <div style="background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:16px 22px;">
+            <div style="font-size:22px;font-weight:700;color:#F8FAFC;">8 de 10</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:2px;">sin proceso de ventas definido</div>
+          </div>
+          <div style="background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:16px 22px;">
+            <div style="font-size:22px;font-weight:700;color:#2563EB;">1 solución</div>
+            <div style="font-size:13px;color:#94A3B8;margin-top:2px;">Launch Top™</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     PARA QUIÉN — EMPRESAS + STARTUPS
+     ==================================================== -->
+<section style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="pill fi">¿Es para ti?</div>
+      <h2 class="sec-h fi">Trabajamos con dos tipos de empresa</h2>
+      <p class="fi" style="color:#94A3B8;font-size:15px;max-width:480px;margin:0 auto;line-height:1.7;">
+        Tanto si llevas años en el mercado como si acabas de lanzar, el problema suele ser el mismo.
+      </p>
+    </div>
+
+    <div class="g2" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- Empresas establecidas -->
+      <div class="fi" style="position:relative;border-radius:12px;overflow:hidden;border:1px solid #1E293B;min-height:380px;">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80"
+             alt="Empresa establecida"
+             style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:brightness(.45) saturate(.5);"
+             loading="lazy">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,16,.95) 0%,rgba(5,5,16,.4) 60%,transparent 100%);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:32px;">
+          <span class="pill" style="margin-bottom:14px;">Empresa 50–200 empleados</span>
+          <h3 style="font-size:22px;font-weight:700;margin:0 0 12px;">Tienes un producto, te faltan ventas</h3>
+          <p style="color:#94A3B8;font-size:14px;line-height:1.7;margin:0 0 20px;">
+            Llevas tiempo en el mercado pero tu proceso comercial depende de la improvisación,
+            de relaciones personales o de un equipo interno sin metodología clara.
+            Sientes que deberías estar creciendo más rápido.
+          </p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#2563EB;">✓</span> Pipeline estructurado y predecible</li>
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#2563EB;">✓</span> Proceso de venta replicable</li>
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#2563EB;">✓</span> Sin contratar nuevos comerciales</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Startups -->
+      <div class="fi" style="position:relative;border-radius:12px;overflow:hidden;border:1px solid #1E293B;min-height:380px;">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80"
+             alt="Startup B2B"
+             style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;filter:brightness(.4) saturate(.5);"
+             loading="lazy">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,16,.95) 0%,rgba(5,5,16,.4) 60%,transparent 100%);"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:32px;">
+          <span class="pill pill-cyan" style="margin-bottom:14px;">Startup en fase de ventas</span>
+          <h3 style="font-size:22px;font-weight:700;margin:0 0 12px;">Lanzaste. Ahora necesitas vender</h3>
+          <p style="color:#94A3B8;font-size:14px;line-height:1.7;margin:0 0 20px;">
+            Tienes un producto validado pero aún no tienes un equipo de ventas ni el presupuesto para montarlo.
+            Necesitas tus primeros clientes B2B y no puedes esperar meses a contratar y formar a un comercial.
+          </p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#06B6D4;">✓</span> Primeras ventas B2B en semanas</li>
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#06B6D4;">✓</span> ICP definido y outreach activo</li>
+            <li style="color:#94A3B8;font-size:13px;display:flex;gap:8px;"><span style="color:#06B6D4;">✓</span> Aceleración sin equity ni dilución</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     PROPUESTA DE VALOR — 3 CARDS
+     ==================================================== -->
+<section style="padding:0 24px 96px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="pill fi">Por qué Launch Top™</div>
+      <h2 class="sec-h fi">Lo que nos diferencia</h2>
+    </div>
+
+    <div class="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Velocidad de ejecución</h3>
+        <p style="color:#94A3B8;font-size:14px;line-height:1.75;margin:0;">
+          Pipeline activo en 48h, primeras reuniones en menos de dos semanas.
+          Sin procesos de onboarding interminables.
+        </p>
+      </div>
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Sin estructura fija</h3>
+        <p style="color:#94A3B8;font-size:14px;line-height:1.75;margin:0;">
+          No pagas salarios, seguros ni oficina. Solo pagas por resultados, y únicamente
+          mientras los resultados llegan.
+        </p>
+      </div>
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Parte de tu equipo</h3>
+        <p style="color:#94A3B8;font-size:14px;line-height:1.75;margin:0;">
+          No somos un proveedor externo. Entendemos tu negocio y tomamos decisiones
+          comerciales alineadas con tus objetivos reales.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     METODOLOGÍA — 4 PASOS
+     ==================================================== -->
+<section id="metodologia" style="padding:96px 24px;background:#0F172A;border-top:1px solid #1E293B;border-bottom:1px solid #1E293B;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:60px;">
+      <div class="pill fi">Proceso</div>
+      <h2 class="sec-h fi">Cómo trabajamos</h2>
+      <p class="fi" style="color:#94A3B8;font-size:15px;max-width:460px;margin:0 auto;line-height:1.7;">
+        Un proceso claro, transparente y orientado a resultados desde el primer día.
+      </p>
+    </div>
+
+    <div class="g4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:28px;position:relative;">
+
+      <div style="text-align:center;position:relative;">
+        <div style="position:relative;display:inline-block;">
+          <div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#1D4ED8);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-weight:700;font-size:15px;color:#fff;position:relative;z-index:1;">1</div>
+          <div class="step-connector" style="position:absolute;top:24px;left:48px;width:calc(100vw / 5);height:1px;background:linear-gradient(90deg,#2563EB,#06B6D4);pointer-events:none;"></div>
+        </div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Diagnóstico</h3>
+        <p style="color:#94A3B8;font-size:13px;line-height:1.75;margin:0;">Auditoría de tu situación comercial actual. Definimos ICP, ciclo de venta y puntos de fuga.</p>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#1D4ED8);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-weight:700;font-size:15px;color:#fff;">2</div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Estrategia</h3>
+        <p style="color:#94A3B8;font-size:13px;line-height:1.75;margin:0;">Plan de ventas personalizado con KPIs claros, plazos reales y acciones concretas desde el día 1.</p>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#2563EB,#1D4ED8);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-weight:700;font-size:15px;color:#fff;">3</div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Ejecución</h3>
+        <p style="color:#94A3B8;font-size:13px;line-height:1.75;margin:0;">Ejecutamos nosotros. Prospección, outreach, demos, seguimiento. Tú supervisas, no ejecutas.</p>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#06B6D4,#0891B2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-weight:700;font-size:15px;color:#fff;">4</div>
+        <h3 style="font-size:16px;font-weight:700;margin:0 0 10px;">Optimización</h3>
+        <p style="color:#94A3B8;font-size:13px;line-height:1.75;margin:0;">Revisión mensual del pipeline. Lo que convierte se escala; lo que no funciona se cambia.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     SERVICIOS — GRID 2×2
+     ==================================================== -->
+<section id="servicios" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="pill fi">Qué hacemos</div>
+      <h2 class="sec-h fi">Servicios de ventas B2B</h2>
+      <p class="fi" style="color:#94A3B8;font-size:15px;max-width:460px;margin:0 auto;line-height:1.7;">
+        Todo el departamento de ventas, externalizado. Sin pagar estructura.
+      </p>
+    </div>
+
+    <div class="g2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:22px;">
+
+      <!-- S1 -->
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;margin:0 0 14px;">Estrategia de ventas B2B</h3>
+        <ul style="list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:9px;">
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Definición del ICP y propuesta de valor</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Roadmap comercial con KPIs trimestrales</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Auditoría del proceso de venta actual</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Reporting mensual ejecutivo</li>
+        </ul>
+        <span class="tag">+35% eficiencia comercial</span>
+      </div>
+
+      <!-- S2 -->
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;margin:0 0 14px;">Prospección y generación de pipeline</h3>
+        <ul style="list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:9px;">
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Construcción de listas de prospectos cualificados</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Outreach multicanal (email + LinkedIn)</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Secuencias de seguimiento automatizadas</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Pipeline activo y actualizado en CRM</li>
+        </ul>
+        <span class="tag">+3× reuniones calificadas</span>
+      </div>
+
+      <!-- S3 -->
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;margin:0 0 14px;">Proceso de venta y cierre</h3>
+        <ul style="list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:9px;">
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Scripts de discovery y presentación</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Gestión de objeciones y negociación</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Seguimiento hasta el cierre del contrato</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Onboarding del cliente y handoff interno</li>
+        </ul>
+        <span class="tag">+45% tasa de cierre</span>
+      </div>
+
+      <!-- S4 -->
+      <div class="card fi">
+        <div style="width:44px;height:44px;background:rgba(37,99,235,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </div>
+        <h3 style="font-size:17px;font-weight:700;margin:0 0 14px;">CRM y automatización de ventas</h3>
+        <ul style="list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:9px;">
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Configuración de HubSpot / Pipedrive</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Automatización con Make / Zapier</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Flujos de seguimiento y alertas</li>
+          <li style="display:flex;gap:9px;color:#94A3B8;font-size:13px;line-height:1.5;"><span style="color:#2563EB;flex-shrink:0;">→</span>Dashboard de ventas en tiempo real</li>
+        </ul>
+        <span class="tag">−60% trabajo manual</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     CALCULADORA ROI
+     ==================================================== -->
+<section id="calculadora" style="padding:96px 24px;background:#0F172A;border-top:1px solid #1E293B;border-bottom:1px solid #1E293B;">
+  <div style="max-width:760px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="pill fi">Calculadora</div>
+      <h2 class="sec-h fi">¿Cuánto te cuesta no tener esto?</h2>
+      <p class="fi" style="color:#94A3B8;font-size:15px;margin:0;line-height:1.7;">
+        Compara el coste de un equipo comercial interno frente a Launch Top™.
+      </p>
+    </div>
+
+    <div class="fi" style="background:#050510;border:1px solid #1E293B;border-radius:16px;padding:34px;">
+
+      <div style="margin-bottom:26px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <label style="color:#F8FAFC;font-size:14px;font-weight:500;">¿Cuántos comerciales necesitas?</label>
+          <span id="dc" style="color:#2563EB;font-weight:700;font-size:20px;">2</span>
+        </div>
+        <input type="range" id="sc" min="1" max="5" value="2" oninput="calcR()">
+        <div style="display:flex;justify-content:space-between;margin-top:5px;">
+          <span style="color:#94A3B8;font-size:12px;">1</span><span style="color:#94A3B8;font-size:12px;">5</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <label style="color:#F8FAFC;font-size:14px;font-weight:500;">Salario medio por comercial (€/mes)</label>
+          <span id="ds" style="color:#2563EB;font-weight:700;font-size:20px;">2.500€</span>
+        </div>
+        <input type="range" id="ss" min="1500" max="5000" step="100" value="2500" oninput="calcR()">
+        <div style="display:flex;justify-content:space-between;margin-top:5px;">
+          <span style="color:#94A3B8;font-size:12px;">1.500€</span><span style="color:#94A3B8;font-size:12px;">5.000€</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;">
+        <div style="background:#0F172A;border:1px solid #1E293B;border-radius:10px;padding:16px;text-align:center;">
+          <div style="color:#94A3B8;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;">Equipo interno</div>
+          <div id="ri" style="font-size:20px;font-weight:700;color:#F87171;">7.000€<span style="font-size:11px;color:#94A3B8;font-weight:400;">/mes</span></div>
+        </div>
+        <div style="background:#0F172A;border:1px solid #1E293B;border-radius:10px;padding:16px;text-align:center;">
+          <div style="color:#94A3B8;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;">Launch Top™</div>
+          <div style="font-size:20px;font-weight:700;color:#4ADE80;">2.250€<span style="font-size:11px;color:#94A3B8;font-weight:400;">/mes</span></div>
+        </div>
+        <div style="background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.26);border-radius:10px;padding:16px;text-align:center;">
+          <div style="color:#94A3B8;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;">Ahorro mensual</div>
+          <div id="rm" style="font-size:20px;font-weight:700;color:#2563EB;">4.750€<span style="font-size:11px;color:#94A3B8;font-weight:400;">/mes</span></div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(6,182,212,.08));border:1px solid rgba(37,99,235,.26);border-radius:12px;padding:22px;text-align:center;margin-bottom:26px;">
+        <div style="color:#94A3B8;font-size:13px;margin-bottom:7px;">Ahorro total en 12 meses</div>
+        <div id="ra" style="font-size:40px;font-weight:700;letter-spacing:-1px;">57.000€</div>
+        <div style="color:#06B6D4;font-size:13px;margin-top:5px;">en costes de estructura fija</div>
+      </div>
+
+      <div style="text-align:center;">
+        <button onclick="openQual()" class="btn-p" style="font-size:15px;padding:14px 28px;">
+          Quiero ese ahorro — Solicitar reunión →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     TESTIMONIOS
+     ==================================================== -->
+<section id="testimonios" style="padding:96px 24px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="pill fi">Clientes</div>
+      <h2 class="sec-h fi">Lo que dicen de nosotros</h2>
+    </div>
+
+    <div class="g3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
+
+      <!-- Javier -->
+      <div class="card fi" style="display:flex;flex-direction:column;gap:16px;">
+        <div class="stars">★★★★★</div>
+        <p style="color:#F8FAFC;font-size:14px;line-height:1.8;margin:0;flex:1;">
+          "Tenemos cuatro restaurantes y siempre vendíamos a particulares. Launch Top nos construyó
+          la línea B2B desde cero: catering corporativo, acuerdos con empresas del polígono,
+          servicio a eventos privados. Hoy el 30% de la facturación viene de esos contratos.
+          Eso no se improvisa, se construye con método."
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #1E293B;">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#D97706,#B45309);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;">J</div>
+          <div>
+            <div style="font-weight:600;font-size:14px;">Javier M.</div>
+            <div style="color:#94A3B8;font-size:12px;">Fundador · Grupo Restauración Barcelona</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gisela -->
+      <div class="card fi" style="display:flex;flex-direction:column;gap:16px;">
+        <div class="stars">★★★★★</div>
+        <p style="color:#F8FAFC;font-size:14px;line-height:1.8;margin:0;flex:1;">
+          "Con mis dos marcas de ropa siempre había vendido directamente al consumidor final.
+          Launch Top me ayudó a construir el canal B2B mayorista: en cuatro meses ya tenía
+          14 boutiques distribuyendo mis colecciones. El proceso que montaron me cambió completamente
+          el modelo de negocio."
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #1E293B;">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#7C3AED,#6D28D9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;">G</div>
+          <div>
+            <div style="font-weight:600;font-size:14px;">Gisela T.</div>
+            <div style="color:#94A3B8;font-size:12px;">Fundadora · 2 marcas de moda, Madrid</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Martí -->
+      <div class="card fi" style="display:flex;flex-direction:column;gap:16px;">
+        <div class="stars">★★★★★</div>
+        <p style="color:#F8FAFC;font-size:14px;line-height:1.8;margin:0;flex:1;">
+          "Una agencia de marketing sin su propio proceso de ventas B2B es el zapatero con mal zapato.
+          Launch Top nos montó el departamento comercial desde cero: ICP, outreach, scripts, CRM.
+          Cerramos tres contratos corporativos en el primer mes. Ojalá lo hubiera hecho dos años antes."
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #1E293B;">
+          <div style="width:42px;height:42px;background:linear-gradient(135deg,#2563EB,#1D4ED8);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;">M</div>
+          <div>
+            <div style="font-weight:600;font-size:14px;">Martí P.</div>
+            <div style="color:#94A3B8;font-size:12px;">Fundador · Agencia de Marketing, Barcelona</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     CTA FINAL
+     ==================================================== -->
+<section class="cta-bg" style="padding:100px 24px;border-top:1px solid #1E293B;text-align:center;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div class="pill fi">Sin compromiso</div>
+    <h2 class="fi" style="font-size:clamp(30px,5vw,56px);font-weight:700;margin:16px 0 20px;letter-spacing:-1.5px;line-height:1.1;">
+      ¿Listo para construir<br>tu máquina de ventas?
+    </h2>
+    <p class="fi" style="color:#94A3B8;font-size:17px;margin:0 0 36px;line-height:1.65;">
+      Primera reunión gratuita. Cuéntanos tu reto y te decimos cómo lo resolveríamos.
+    </p>
+    <div class="fi">
+      <button onclick="openQual()" class="btn-p" style="font-size:17px;padding:17px 36px;box-shadow:0 0 48px rgba(37,99,235,.3);">
+        Solicitar reunión con Oriol →
+      </button>
+    </div>
+    <p class="fi" style="color:#475569;font-size:13px;margin:16px 0 0;">
+      Respuesta en menos de 24h · Solo 5 plazas disponibles al mes
+    </p>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     FOOTER
+     ==================================================== -->
+<footer style="background:#050510;border-top:1px solid #1E293B;padding:52px 24px 28px;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="footer-top" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;margin-bottom:44px;">
+
+      <div style="max-width:250px;">
+        <a href="#" style="display:flex;align-items:center;text-decoration:none;margin-bottom:12px;">
+          <img src="logo.png" alt="Launch Top™" style="height:30px;object-fit:contain;filter:brightness(0) invert(1);" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+          <span style="display:none;font-weight:700;font-size:17px;color:#F8FAFC;">Launch Top™</span>
+        </a>
+        <p style="color:#475569;font-size:13px;line-height:1.65;margin:0;">
+          Tu departamento externo de ventas B2B.
+        </p>
+      </div>
+
+      <div style="display:flex;gap:52px;flex-wrap:wrap;">
+        <div>
+          <div style="color:#F8FAFC;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;">Servicios</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#servicios" class="fl">Estrategia de ventas</a>
+            <a href="#servicios" class="fl">Prospección B2B</a>
+            <a href="#servicios" class="fl">Proceso de cierre</a>
+            <a href="#servicios" class="fl">CRM y automatización</a>
+          </div>
+        </div>
+        <div>
+          <div style="color:#F8FAFC;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;">Empresa</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#historia"    class="fl">Nuestra historia</a>
+            <a href="#metodologia" class="fl">Metodología</a>
+            <a href="#testimonios" class="fl">Testimonios</a>
+            <button onclick="openContact()" class="fl" style="background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;padding:0;">Contacto</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="color:#F8FAFC;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;">Síguenos</div>
+        <a href="#" aria-label="LinkedIn"
+           style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#0F172A;border:1px solid #1E293B;border-radius:8px;transition:border-color .2s;"
+           onmouseover="this.style.borderColor='#2563EB'" onmouseout="this.style.borderColor='#1E293B'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#94A3B8">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #1E293B;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+      <p style="color:#374151;font-size:12px;margin:0;max-width:560px;line-height:1.6;">
+        Launch Top™ es una marca comercial. © 2025 Launch Top. Todos los derechos reservados.
+        Con domicilio en Barcelona, España. Para consultas, usa el formulario de contacto de esta página.
+      </p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <a href="#" class="fl" style="font-size:12px;">Política de privacidad</a>
+        <a href="#" class="fl" style="font-size:12px;">Términos y condiciones</a>
+        <a href="#" class="fl" style="font-size:12px;">Aviso legal</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ====================================================
+     MODAL — FORMULARIO DE PRECALIFICACIÓN (para reunión)
+     ==================================================== -->
+<div class="modal" id="modal-qual" onclick="handleOvQ(event)">
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:36px;width:100%;max-width:560px;margin:16px;position:relative;max-height:92vh;overflow-y:auto;">
+
+    <button onclick="closeQual()" style="position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:#94A3B8;font-size:26px;line-height:1;padding:4px;">×</button>
+
+    <!-- Step 1: Formulario -->
+    <div id="qual-form-wrap">
+      <div style="margin-bottom:6px;">
+        <span class="pill" style="margin:0;font-size:12px;">Paso 1 de 2 · Cuéntanos sobre ti</span>
+      </div>
+      <h2 style="font-size:21px;font-weight:700;margin:12px 0 6px;">Solicita tu reunión gratuita</h2>
+      <p style="color:#94A3B8;font-size:14px;margin:0 0 26px;line-height:1.6;">
+        Antes de reservar, cuéntanos un poco sobre tu empresa. Así la reunión será más útil para los dos.
+      </p>
+
+      <form id="qual-form" onsubmit="sendQual(event)" style="display:flex;flex-direction:column;gap:13px;">
+
+        <div class="form2c" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+          <div>
+            <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Nombre *</label>
+            <input type="text" name="nombre" required class="fi-input" placeholder="Tu nombre">
+          </div>
+          <div>
+            <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Empresa *</label>
+            <input type="text" name="empresa" required class="fi-input" placeholder="Nombre de tu empresa">
+          </div>
+        </div>
+
+        <div class="form2c" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+          <div>
+            <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Cargo *</label>
+            <input type="text" name="cargo" required class="fi-input" placeholder="CEO, Director Comercial...">
+          </div>
+          <div>
+            <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Email corporativo *</label>
+            <input type="email" name="email" required class="fi-input" placeholder="tu@empresa.com">
+          </div>
+        </div>
+
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Sector de tu empresa *</label>
+          <select name="sector" required class="fi-input">
+            <option value="" disabled selected>Selecciona sector</option>
+            <option>Tecnología / SaaS</option>
+            <option>Retail / Moda / Consumo</option>
+            <option>Restauración / Hostelería</option>
+            <option>Agencia / Consultoría</option>
+            <option>Industrial / Manufactura</option>
+            <option>Servicios profesionales</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">¿Cuántos comerciales tienes actualmente? *</label>
+          <select name="comerciales" required class="fi-input">
+            <option value="" disabled selected>Selecciona</option>
+            <option>0 — todavía no tengo equipo de ventas</option>
+            <option>1–2 comerciales</option>
+            <option>3–5 comerciales</option>
+            <option>Más de 5 comerciales</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">¿En qué plazo buscas resultados? *</label>
+          <select name="plazo" required class="fi-input">
+            <option value="" disabled selected>Selecciona</option>
+            <option>Lo antes posible (1–4 semanas)</option>
+            <option>1–3 meses</option>
+            <option>3–6 meses</option>
+            <option>Todavía explorando opciones</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">¿Cuál es tu principal reto en ventas ahora mismo? *</label>
+          <textarea name="reto" required rows="3" class="fi-input" placeholder="Ej: No tenemos pipeline, no cerramos suficiente, no sabemos a quién dirigirnos..."></textarea>
+        </div>
+
+        <div id="qual-err" style="display:none;color:#F87171;font-size:13px;padding:9px 13px;background:rgba(248,113,113,.09);border-radius:8px;border:1px solid rgba(248,113,113,.2);"></div>
+
+        <button type="submit" id="qual-sbtn" class="btn-p" style="width:100%;font-size:15px;padding:13px;margin-top:4px;">
+          Continuar →
+        </button>
+
+        <p style="text-align:center;color:#475569;font-size:12px;margin:0;">
+          Sin spam. Tus datos solo se usan para preparar la reunión.
+        </p>
+      </form>
+    </div>
+
+    <!-- Step 2: Confirmación + Calendly -->
+    <div id="qual-success" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:56px;height:56px;background:rgba(74,222,128,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <span class="pill pill-cyan" style="margin-bottom:14px;">Paso 2 de 2 · Elige tu horario</span>
+      <h3 style="font-size:20px;font-weight:700;margin:0 0 10px;">¡Perfecto! Ya tenemos tus datos.</h3>
+      <p style="color:#94A3B8;font-size:14px;margin:0 0 28px;line-height:1.65;">
+        Ahora elige el slot que mejor te venga. La reunión dura 30 minutos
+        y es completamente gratuita.
+      </p>
+      <a href="https://calendly.com/launchtop-team/reunion-launchtop"
+         target="_blank" rel="noopener noreferrer"
+         class="btn-p" style="font-size:16px;padding:15px 32px;display:inline-block;box-shadow:0 0 36px rgba(37,99,235,.3);">
+        Reservar mi slot en Calendly →
+      </a>
+      <p style="color:#475569;font-size:12px;margin:16px 0 0;">
+        Se abrirá en una pestaña nueva. Solo 5 plazas al mes.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ====================================================
+     MODAL — CONTACTO GENERAL
+     ==================================================== -->
+<div class="modal" id="modal-contact" onclick="handleOvC(event)">
+  <div style="background:#0F172A;border:1px solid #1E293B;border-radius:16px;padding:36px;width:100%;max-width:500px;margin:16px;position:relative;max-height:90vh;overflow-y:auto;">
+
+    <button onclick="closeContact()" style="position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:#94A3B8;font-size:26px;line-height:1;padding:4px;">×</button>
+
+    <h2 style="font-size:21px;font-weight:700;margin:0 0 6px;">Escríbenos</h2>
+    <p style="color:#94A3B8;font-size:14px;margin:0 0 26px;line-height:1.6;">
+      Para cualquier otra consulta. Respondemos en menos de 24h.
+    </p>
+
+    <form id="contact-form" onsubmit="sendContact(event)" style="display:flex;flex-direction:column;gap:13px;">
+
+      <div class="form2c" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Nombre *</label>
+          <input type="text" name="nombre" required class="fi-input" placeholder="Tu nombre">
+        </div>
+        <div>
+          <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Empresa *</label>
+          <input type="text" name="empresa" required class="fi-input" placeholder="Tu empresa">
+        </div>
+      </div>
+
+      <div>
+        <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">Email *</label>
+        <input type="email" name="email" required class="fi-input" placeholder="tu@empresa.com">
+      </div>
+
+      <div>
+        <label style="display:block;color:#94A3B8;font-size:12px;font-weight:500;margin-bottom:5px;">¿En qué podemos ayudarte? *</label>
+        <textarea name="mensaje" required rows="4" class="fi-input" placeholder="Cuéntanos tu situación..."></textarea>
+      </div>
+
+      <div id="contact-err" style="display:none;color:#F87171;font-size:13px;padding:9px 13px;background:rgba(248,113,113,.09);border-radius:8px;border:1px solid rgba(248,113,113,.2);"></div>
+
+      <button type="submit" id="contact-sbtn" class="btn-p" style="width:100%;font-size:15px;padding:13px;">
+        Enviar mensaje
+      </button>
+    </form>
+
+    <div id="contact-ok" style="display:none;text-align:center;padding:24px 0;">
+      <div style="width:50px;height:50px;background:rgba(74,222,128,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 style="font-size:18px;font-weight:700;margin:0 0 6px;">¡Recibido!</h3>
+      <p style="color:#94A3B8;font-size:14px;margin:0;">Te contactamos en menos de 24h.</p>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ====================================================
+     JAVASCRIPT
+     ==================================================== -->
+<script>
+
+/* ---- Navbar scroll ---- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('nav-scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ---- Mobile menu ---- */
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('mmenu').style.display = menuOpen ? 'block' : 'none';
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('mmenu').style.display = 'none';
+}
+
+/* ---- Particles ---- */
+(function () {
+  const cv = document.getElementById('pcv');
+  const cx = cv.getContext('2d');
+  let pts = [];
+
+  function resize() { cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; }
+
+  function init() {
+    pts = [];
+    const n = Math.min(50, Math.floor(cv.width * cv.height / 15000));
+    for (let i = 0; i < n; i++) {
+      pts.push({
+        x: Math.random() * cv.width,  y: Math.random() * cv.height,
+        vx: (Math.random() - .5) * .26, vy: (Math.random() - .5) * .26,
+        r: Math.random() * 1.3 + .5,    a: Math.random() * .4 + .15,
+      });
+    }
+  }
+
+  function tick() {
+    cx.clearRect(0, 0, cv.width, cv.height);
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 110) {
+          cx.beginPath();
+          cx.strokeStyle = `rgba(37,99,235,${0.13 * (1 - d / 110)})`;
+          cx.lineWidth = .5;
+          cx.moveTo(pts[i].x, pts[i].y);
+          cx.lineTo(pts[j].x, pts[j].y);
+          cx.stroke();
+        }
+      }
+      const p = pts[i];
+      cx.beginPath();
+      cx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      cx.fillStyle = `rgba(37,99,235,${p.a})`;
+      cx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > cv.width)  p.vx *= -1;
+      if (p.y < 0 || p.y > cv.height) p.vy *= -1;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  resize(); init(); tick();
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+})();
+
+/* ---- Fade-in ---- */
+const fiEls = document.querySelectorAll('.fi');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+fiEls.forEach(el => obs.observe(el));
+
+/* ---- ROI Calculator ---- */
+function fmt(n) { return n.toLocaleString('es-ES') + '€'; }
+
+function animTo(el, target, suffix) {
+  const from = parseFloat(el.dataset.v || '0');
+  const dur = 480, t0 = performance.now();
+  function step(now) {
+    const p = Math.min((now - t0) / dur, 1);
+    const v = Math.round(from + (target - from) * (1 - Math.pow(1 - p, 3)));
+    el.innerHTML = fmt(v) + (suffix || '');
+    el.dataset.v = v;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function calcR() {
+  const c = parseInt(document.getElementById('sc').value);
+  const s = parseInt(document.getElementById('ss').value);
+  document.getElementById('dc').textContent = c;
+  document.getElementById('ds').textContent = s.toLocaleString('es-ES') + '€';
+  const interno  = Math.round(c * s * 1.4);
+  const ahorroM  = Math.max(0, interno - 2250);
+  const ahorroA  = ahorroM * 12;
+  const suf = '<span style="font-size:11px;color:#94A3B8;font-weight:400;">/mes</span>';
+  animTo(document.getElementById('ri'), interno, suf);
+  animTo(document.getElementById('rm'), ahorroM, suf);
+  animTo(document.getElementById('ra'), ahorroA, '');
+}
+calcR();
+
+/* ----
+   GOOGLE SCRIPT URL
+   ⚠️ PLACEHOLDER: actualiza si regeneras el Apps Script
+   ------------------------------------------------------------------ */
+const GS_URL = 'https://script.google.com/macros/s/AKfycbzZOpGiMJ5MURmoy21IFrwvV_ITqC4AEIXvoxBLDVXyPFjuW5ZQZF2ylJkkbwI9zi2i/exec';
+
+async function postToSheet(data) {
+  data.timestamp = new Date().toISOString();
+  await fetch(GS_URL, {
+    method: 'POST',
+    mode: 'no-cors', // Google Apps Script requiere no-cors
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+}
+
+/* ---- Modal Precalificación (reunión) ---- */
+function openQual() {
+  document.getElementById('modal-qual').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQual() {
+  document.getElementById('modal-qual').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOvQ(e) { if (e.target === document.getElementById('modal-qual')) closeQual(); }
+
+async function sendQual(e) {
+  e.preventDefault();
+  const form = document.getElementById('qual-form');
+  const sbtn = document.getElementById('qual-sbtn');
+  const err  = document.getElementById('qual-err');
+
+  const email = form.querySelector('[name="email"]').value;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'Por favor, introduce un email válido.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  sbtn.textContent = 'Enviando...';
+  sbtn.disabled = true;
+
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.origen = 'formulario_reunion';
+
+  try {
+    await postToSheet(data);
+    document.getElementById('qual-form-wrap').style.display = 'none';
+    document.getElementById('qual-success').style.display = 'block';
+  } catch {
+    sbtn.textContent = 'Continuar →';
+    sbtn.disabled = false;
+    err.textContent = 'Error al enviar. Inténtalo de nuevo.';
+    err.style.display = 'block';
+  }
+}
+
+/* ---- Modal Contacto general ---- */
+function openContact() {
+  document.getElementById('modal-contact').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContact() {
+  document.getElementById('modal-contact').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOvC(e) { if (e.target === document.getElementById('modal-contact')) closeContact(); }
+
+async function sendContact(e) {
+  e.preventDefault();
+  const form = document.getElementById('contact-form');
+  const sbtn = document.getElementById('contact-sbtn');
+  const err  = document.getElementById('contact-err');
+
+  const email = form.querySelector('[name="email"]').value;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    err.textContent = 'Por favor, introduce un email válido.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  sbtn.textContent = 'Enviando...';
+  sbtn.disabled = true;
+
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.origen = 'contacto_general';
+
+  try {
+    await postToSheet(data);
+    form.style.display = 'none';
+    document.getElementById('contact-ok').style.display = 'block';
+  } catch {
+    sbtn.textContent = 'Enviar mensaje';
+    sbtn.disabled = false;
+    err.textContent = 'Error al enviar. Inténtalo de nuevo.';
+    err.style.display = 'block';
+  }
+}
+
+/* ---- Cerrar modales con Escape ---- */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeQual(); closeContact(); }
+});
+
+</script>
+
+
+<!--
+=======================================================
+  VARIABLES Y PLACEHOLDERS — REVISAR ANTES DE PUBLICAR
+=======================================================
+
+1. GOOGLE SCRIPT URL (variable GS_URL en el JS):
+   → URL actual configurada:
+     https://script.google.com/macros/s/AKfycbzZOpGiMJ5MURmoy21IFrwvV_ITqC4AEIXvoxBLDVXyPFjuW5ZQZF2ylJkkbwI9zi2i/exec
+   → Actualiza si regeneras el Apps Script.
+
+2. CALENDLY URL (en modal-qual, paso 2):
+   → https://calendly.com/launchtop-team/reunion-launchtop
+   → Verifica que sigue activa antes de publicar.
+
+3. LOGO PRINCIPAL:
+   → logo.png (misma carpeta). Fallback: texto "Launch Top™".
+
+4. LOGOS CLIENTES (marquee):
+   → logo-bufalvent.png, logo-datrax.png, logo-mobafrutal.png, logo-lilac.png
+   → Fallback: nombre en texto si el archivo no existe.
+
+5. IMÁGENES UNSPLASH (se cargan desde CDN):
+   → Hero derecha:       https://images.unsplash.com/photo-1553028826-f4804a6dba3b
+   → Historia sección:   https://images.unsplash.com/photo-1519389950473-47ba0277781c
+   → Card empresa:       https://images.unsplash.com/photo-1497366216548-37526070297c
+   → Card startup:       https://images.unsplash.com/photo-1460925895917-afdab827c52f
+   → Requieren conexión a internet. Para producción puedes descargarlas y servir en local.
+
+6. LINKS LEGALES (footer, actualmente href="#"):
+   → Política de privacidad, Términos y condiciones, Aviso legal.
+   → Crea las páginas o apunta a PDFs.
+
+7. LINKEDIN (footer, actualmente href="#"):
+   → Sustituye con la URL real del perfil de LinkedIn de Launch Top™.
+
+8. PRECIO LAUNCH TOP™ (calculadora):
+   → Fijado en 2.250€/mes. Ajusta en calcR() si cambia.
+
+=======================================================
+-->
+
+</body>
+</html>
